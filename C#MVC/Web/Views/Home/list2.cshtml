@@ -1,7 +1,7 @@
 ﻿
 @{
     Layout = null;
-    ViewBag.Title = "list";
+    ViewBag.Title = "list2";
 }
 
 <!DOCTYPE html>
@@ -16,7 +16,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <title>AdminLTE 2 | Bootstrap-Table Demo</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <link rel="stylesheet" href="@Url.Content("~/Content/AdminLTE-2.4.3/bower_components/bootstrap/dist/css/bootstrap.min.css")" >
+    <link rel="stylesheet" href="@Url.Content("~/Content/AdminLTE-2.4.3/bower_components/bootstrap/dist/css/bootstrap.min.css")">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="@Url.Content("~/Content/AdminLTE-2.4.3/Bootstrap-Table/dist/bootstrap-table.min.css")">
 
@@ -423,6 +423,7 @@ desired effect
     <script src="@Url.Content("~/Content/AdminLTE-2.4.3/Bootstrap-Table/dist/locale/bootstrap-table-zh-CN.min.js")"></script>
     <script>
 	var myTable=$('#table');
+	var queryParams = { pageSize: 3, pageNumber: 1, searchText: "", sortName: "", sortOrder: "" };
 
 	$(function () {
 	    //先销毁表格
@@ -430,7 +431,7 @@ desired effect
 	    //初始化表格,动态从服务器加载数据
 	    myTable.bootstrapTable({
 	        striped: true, //表格显示条纹
-	        pagination: true, //启动分页
+	        pagination: true, //设置为 true 会在表格底部显示分页条。
 	        paginationDetailHAlign: 'left',
 	        paginationHAlign: 'right',
 	        pageSize: 3, //每页显示的记录数
@@ -438,6 +439,7 @@ desired effect
 	        pageList: [5, 10, 15, 20, 25], //记录数可选列表
 	        buttonsAlign: 'right',
 	        showColumns: true, //显示下拉框勾选要显示的列
+	        minimumCountColumns: 1, //最小隐藏列的数量。
 	        showRefresh: true, //显示刷新按钮
 	        showToggle: true, //是否显示切换视图（table/card）按钮。
 	        showPaginationSwitch: true, //是否显示切换分页按钮
@@ -456,6 +458,15 @@ desired effect
 	            detailOpen: 'fa-plus',
 	            detailClose: 'fa-minus'
 	        },
+	        url: "/Home/getlist2", //服务器数据的加载地址。
+	        method: "get", //服务器数据的请求方式 'get' 或 'post'。
+	        sidePagination: "server", //设置在哪里进行分页，可选值为 'client' 或者 'server'。设置 'server'时，必须设置服务器数据地址（url）或者重写ajax方法。
+	        queryParamsType:'',
+	        queryParams: function (params) {
+	            console.dir(params);
+	            //return params;
+	            return queryParams;
+	        },
 	        columns: [{
 	            field: 'id',
 	            title: 'Item ID'
@@ -466,38 +477,19 @@ desired effect
 	            field: 'price',
 	            title: 'Item Price'
 	        }],
+	        responseHandler: function (res) { //加载服务器数据之前的处理程序，可以用来格式化数据。参数：res为从服务器请求到的数据。
+	            console.dir(res);
+	            return res;
+	        },
+	        //data: function (data) { //格式化数据
+	        //    console.dir(data);
+	        //    return data;
+	        //},
 	        selectItemName: 'id', //radio 或者 checkbox 的字段 name 名。
 	        detailView: true, //设置为 true 可以显示详细页面模式。
 	        detailFormatter: function (index, row) {
 	            return '这是详细内容：' + index;
-	        },
-	        data: [
-                  {
-                      "id": 1,
-                      "name": "Apple",
-                      "price": "8.80￥"
-                  },
-                  {
-                      "id": 2,
-                      "name": "Banana",
-                      "price": "11.50￥"
-                  },
-                  {
-                      "id": 3,
-                      "name": "Pear",
-                      "price": "5.20￥"
-                  },
-                  {
-                      "id": 4,
-                      "name": "Watermelon",
-                      "price": "4.70￥"
-                  },
-                  {
-                      "id": 5,
-                      "name": "Kiwifruit",
-                      "price": "18.16￥"
-                  }
-	        ]
+	        }
 	    });
 
 	});
