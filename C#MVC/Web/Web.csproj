@@ -7492,6 +7492,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BootstrapTableData.cs" />
+    <Compile Include="Models\HomeVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -7503,6 +7504,7 @@
     <Content Include="scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Home\list.cshtml" />
     <Content Include="Views\Home\list2.cshtml" />
+    <Content Include="Views\Home\list3.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
