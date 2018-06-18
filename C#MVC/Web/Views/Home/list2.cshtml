@@ -33,12 +33,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    <script src="../html5shiv/html5shiv.min.js"></script>
-    <script src="../respond/respond.min.js"></script>
+        <script src="@Url.Content("~/Content/AdminLTE-2.4.3/html5shiv/html5shiv.min.js")"></script>
+        <script src="@Url.Content("~/Content/AdminLTE-2.4.3/respond/respond.min.js")"></script>
     <![endif]-->
     <!-- Google Font -->
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -261,7 +260,7 @@ desired effect
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="header">HEADER</li>
                     <!-- Optionally, you can add icons to the links -->
-                    <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Link</span></a></li>
+                    <li class="active"><a href="@Url.Action("Login", "Account")"><i class="fa fa-link"></i> <span>登录页面</span></a></li>
                     <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
                     <li class="treeview">
                         <a href="#">
@@ -271,9 +270,9 @@ desired effect
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="@Url.Action("list", "Home")">基本样例</a></li>
-                            <li><a href="@Url.Action("list2", "Home")">加载数据</a></li>
-                            <li><a href="@Url.Action("list3", "Home")">实用样例</a></li>
+                            <li><a href="@Url.Action("list", "Home")"><i class="fa fa-circle-o"></i>基本样例</a></li>
+                            <li><a href="@Url.Action("list2", "Home")"><i class="fa fa-circle-o"></i>加载数据</a></li>
+                            <li><a href="@Url.Action("list3", "Home")"><i class="fa fa-circle-o"></i>实用样例</a></li>
                         </ul>
                     </li>
                 </ul>
