@@ -32,8 +32,10 @@
     <![endif]-->
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+    <link rel="stylesheet" href="@Url.Content("~/Content/Account/login.css")">
 </head>
-<body class="hold-transition login-page" style="background:url('@Url.Content("~/Content/AdminLTE-2.4.3/dist/img/boxed-bg.jpg")') repeat fixed;">
+<body class="hold-transition login-page bg2">
     <div class="login-box">
         <div class="login-logo">
             <a href="@Url.Action("Login", "Account")"><b>广告业务系统</b></a>
@@ -45,36 +47,37 @@
             <form action="@Url.Action("Login", "Account")" method="post">
                 <div class="form-group has-feedback">
                     <div class="form-group">
-                        <select class="form-control select2" style="width: 100%;">
+                        <select class="form-control select2" name="loginType" id="loginType" style="width: 100%;">
+                            <option value="">-- 请选择 --</option>
                             <option value="0">超级管理员</option>
-                            <option value="0">管理员</option>
-                            <option value="0">销售员</option>
-                            <option value="0">录入员</option>
-                            <option value="0">客服员</option>
-                            <option value="0">财务员</option>
-                            <option value="0">审核员</option>
+                            <option value="1">管理员</option>
+                            <option value="2">销售员</option>
+                            <option value="3">录入员</option>
+                            <option value="4">客服员</option>
+                            <option value="5">财务员</option>
+                            <option value="6">审核员</option>
                         </select>
                     </div>
                 </div>
                 <div class="form-group has-feedback">
-                    <input type="email" class="form-control" placeholder="Email">
+                    <input type="email" class="form-control" name="loginEmail" id="loginEmail" placeholder="Email/Mobile phone">
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                 </div>
                 <div class="form-group has-feedback">
-                    <input type="password" class="form-control" placeholder="Password">
+                    <input type="password" class="form-control" name="loginPwd" id="loginPwd" placeholder="Password">
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                 </div>
                 <div class="row">
                     <div class="col-xs-8">
                         <div class="checkbox icheck">
                             <label>
-                                <input type="checkbox"> 记住我
+                                <input type="checkbox" name="loginRememberMe" id="loginRememberMe"> 记住我
                             </label>
                         </div>
                     </div>
                     <!-- /.col -->
                     <div class="col-xs-4">
-                        <button type="submit" class="btn btn-primary btn-block btn-flat" style="margin-top: 5px;">登 录</button>
+                        <button name="btnLogin" id="btnLogin" class="btn btn-primary btn-block btn-flat" style="margin-top: 5px;">登 录</button>
                     </div>
                     <!-- /.col -->
                 </div>
@@ -86,7 +89,7 @@
         </div>
         <!-- /.login-box-body -->
 
-        <div style="margin: 20px 0px;text-align:  center;">Copyright &copy; 2018 某某公司 由<a href="https://hbdd.taobao.com/" class="text-center" style="border-bottom:1px solid #3c8dbc;">好宝多多</a>提供技术支持</div>
+        <div class="footer" style="margin: 20px 0px;text-align:  center;">Copyright &copy; 2018 某某公司 由<a href="https://hbdd.taobao.com/" class="text-center">好宝多多</a>技术支持</div>
 
     </div>
     <!-- /.login-box -->
@@ -98,16 +101,45 @@
     <script src="@Url.Content("~/Content/AdminLTE-2.4.3/bower_components/select2/dist/js/select2.full.min.js")"></script>
     <!-- iCheck -->
     <script src="@Url.Content("~/Content/AdminLTE-2.4.3/plugins/iCheck/icheck.min.js")"></script>
+    
+    <script src="@Url.Content("~/scripts/ClassBaoJavascript-1.0.0.js")"></script>
+    <script src="@Url.Content("~/Content/Account/login.js")"></script>
     <script>
         $(function () {
             //Initialize Select2 Elements
             $('.select2').select2();
 
+            $(".select2").on("select2:select", function (e) {
+                // e 的话就是一个对象 然后需要什么就 “e.参数” 形式 进行获取 
+                //console.log(e);
+                //console.log(e.params.data);
+                $(this).val(e.params.data.id);
+            });
+            $(".select2").on("select2:unselect", function (e) {
+                // e 的话就是一个对象 然后需要什么就 “e.参数” 形式 进行获取 
+                //console.log(e);
+                //console.log(e.params.data);
+                $(this).val("");
+            });
+
+            //checkbox Or radio
             $('input').iCheck({
                 checkboxClass: 'icheckbox_square-blue',
                 radioClass: 'iradio_square-blue',
                 increaseArea: '20%' /* optional */
             });
+
+            $('input').on('ifChanged', function (event) {
+                //输入框的 checked 或 disabled 状态改变了
+                alert(event.type + ' callback');
+                if ($(this).is(':checked')) {//就是这么简单
+                    alert("Yes");
+                }
+                else {
+                    alert("No");
+                }
+            });
+
         });
     </script>
 </body>

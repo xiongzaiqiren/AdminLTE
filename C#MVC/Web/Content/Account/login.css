@@ -1,0 +1,78 @@
+﻿/* 
+* @Author: xiongzaiqiren
+* @Date:   2017-11-11 18:22:35
+* @Last Modified by:   xiongzaiqiren
+* @Last Modified time: 2017-11-19 16:21:08
+*/
+
+/*@charset "utf-8";*/
+
+body {
+    background-color: #034067;
+}
+    body.bg0 {
+        background: url(../AdminLTE-2.4.3/dist/img/boxed-bg.jpg) repeat fixed;
+    }
+    body.bg1 {
+        background: url(../AdminLTE-2.4.3/dist/img/boxed-bg.png) repeat fixed;
+    }
+
+    body.bg2 {
+        background-image: url(bg1.png);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+        background-color: #000;
+        background-size: cover;
+    }
+    body.bg3 {
+        background-image: url(bg2.png);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+        background-color: #000;
+        background-size: cover;
+    }
+
+        body.bg2 .login-logo a, body.bg3 .login-logo a {
+            color: #d2e4ef;
+        }
+        body.bg2 .footer, body.bg3 .footer {
+            color: #d2e4ef;
+        }
+
+    body.bg0 .footer a, body.bg1 .footer a {
+        border-bottom: 1px solid #3c8dbc;
+    }
+    body.bg2 .footer a, body.bg3 .footer a {
+        color: #d2e4ef;
+        border-bottom: 1px solid #d2e4ef;
+    }
+
+    body.bg2 .login-box-body, body.bg3 .login-box-body {
+        background: none;
+    }
+        body.bg2 .login-box-body .login-box-msg,body.bg3 .login-box-body .login-box-msg {
+            color: #d2e4ef;
+        }
+
+        body.bg2 .login-box-body .select2-selection,body.bg3 .login-box-body .select2-selection {
+            background-color: transparent;
+        }
+        body.bg2 .login-box-body .select2-selection__rendered,body.bg3 .login-box-body .select2-selection__rendered {
+            font-size: 20px;
+            color: #d2d6de;
+        }
+        body.bg2 .login-box-body .form-control,body.bg3 .login-box-body .form-control {
+            padding: 3px 12px;
+            font-size: 20px;
+            background-color: transparent;
+            /*border-color: #d2d6de;*/
+            color: #d2d6de;
+        }
+        body.bg2 .login-box-body .icheck label,body.bg3 .login-box-body .icheck label{
+            color: #d2d6de;
+        }
+        body.bg2 .login-box-body a,body.bg3 .login-box-body a {
+            color: #d2d6de;
+        }

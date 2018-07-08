@@ -22,7 +22,7 @@ namespace Web.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public ActionResult Login(int type, string name, string pwd)
+        public ActionResult Login(int loginType, string loginEmail, string loginPwd, bool loginRememberMe)
         {
             return Json(new { });
         }
