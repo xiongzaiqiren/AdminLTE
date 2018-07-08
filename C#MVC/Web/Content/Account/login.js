@@ -82,7 +82,7 @@ function SubmitAjax() {
         dataType: "json",
         type: "post",
         beforeSend: function (XHR) {
-            $("#btnLogin").html("登录中...");
+            $("#btnLogin").attr("disabled", "disabled").css("cursor", "not-allowed").addClass("disabled").html("登录中...");
         },
         dataFilter: function (data, type) {
             if (("json" === type || "jsonp" === type) && "object" === typeof (data)) {
@@ -127,7 +127,7 @@ function SubmitAjax() {
             return;
         },
         complete: function (XHR, TS) {
-            $("#btnLogin").html("登 录");
+            $("#btnLogin").removeAttr("disabled").css("cursor", "pointer").removeClass("disabled").html("登 录");
         }
     });
 };
