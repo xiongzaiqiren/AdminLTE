@@ -7497,6 +7497,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Handler\CheckCodeImg.ashx.cs">
+      <DependentUpon>CheckCodeImg.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Models\BootstrapTableData.cs" />
     <Compile Include="Models\HomeVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -7511,6 +7514,7 @@
     <Content Include="Views\Home\list2.cshtml" />
     <Content Include="Views\Home\list3.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Handler\CheckCodeImg.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

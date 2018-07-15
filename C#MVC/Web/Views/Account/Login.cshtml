@@ -42,8 +42,7 @@
         </div>
         <!-- /.login-logo -->
         <div class="login-box-body">
-            <p class="login-box-msg">欢迎您登录！</p>
-
+            @*<p class="login-box-msg">欢迎您登录！</p>*@
             <form action="@Url.Action("Login", "Account")" method="post">
                 <div class="form-group has-feedback">
                     <div class="form-group">
@@ -66,6 +65,10 @@
                 <div class="form-group has-feedback">
                     <input type="password" class="form-control" name="loginPwd" id="loginPwd" placeholder="Password">
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                </div>
+                <div class="form-group has-feedback CheckCode-group">
+                    <a href="javascript:;" onclick="javascript: document.getElementById('imgCheckCode').src = '/Handler/CheckCodeImg.ashx?t=' + (new Date()).getTime();" title="点击刷新"><img src="/Handler/CheckCodeImg.ashx" id="imgCheckCode" /></a>
+                    <input type="text" class="form-control" name="loginCheckCode" id="loginCheckCode" placeholder="Code">
                 </div>
                 <div class="row">
                     <div class="col-xs-8">
