@@ -22,6 +22,13 @@ namespace Web.Models
         public BootstrapTableData() { total = 0; rows = default(List<object>); }
         public BootstrapTableData(long total, IList rows) { this.total = total; this.rows = rows; }
     }
+    public class BootstrapTableData<T> : BootstrapTableData
+    {
+        public new IList<T> rows { get; set; }
+
+        public BootstrapTableData() { total = 0; rows = new List<T>(); }
+        public BootstrapTableData(long total, IList<T> rows) { this.total = total; this.rows = rows; }
+    }
 
     public enum ResponseStatus : int
     {
@@ -47,6 +54,14 @@ namespace Web.Models
 
         public ResponseResultModel() : base() { data = new BootstrapTableData(); }
         public ResponseResultModel(ResponseStatus status, string message) : base(status, message) { data = new BootstrapTableData(); }
+    }
+
+    public class ResponseResultModel<T> : ResponseResult
+    {
+        public BootstrapTableData<T> data { get; set; }
+
+        public ResponseResultModel() : base() { data = new BootstrapTableData<T>(); }
+        public ResponseResultModel(ResponseStatus status, string message) : base(status, message) { data = new BootstrapTableData<T>(); }
     }
 
 }
