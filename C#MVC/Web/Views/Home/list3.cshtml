@@ -24,6 +24,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="@Url.Content("~/Content/AdminLTE-2.4.3/bower_components/font-awesome/css/font-awesome.min.css")">
     <!-- Ionicons -->
     <link rel="stylesheet" href="@Url.Content("~/Content/AdminLTE-2.4.3/bower_components/Ionicons/css/ionicons.min.css")">
+    
+    <!-- bootstrap datetimepicker -->
+    <link rel="stylesheet" href="@Url.Content("~/Content/AdminLTE-2.4.3/bower_components/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css")">
+
     <!-- Theme style -->
     <link rel="stylesheet" href="@Url.Content("~/Content/AdminLTE-2.4.3/dist/css/AdminLTE.min.css")">
     <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
@@ -260,7 +264,7 @@ desired effect
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="header">HEADER</li>
                     <!-- Optionally, you can add icons to the links -->
-                    <li class="active"><a href="@Url.Action("Login", "Account")"><i class="fa fa-link"></i> <span>登录页面</span></a></li>
+                    <li><a href="@Url.Action("Login", "Account")"><i class="fa fa-link"></i> <span>登录页面</span></a></li>
                     <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
                     <li class="treeview">
                         <a href="#">
@@ -302,8 +306,54 @@ desired effect
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="box">
-                            <div class="box-header">
-                                <h3 class="box-title">This is  Box Title</h3>
+                            <div class="box-header with-border">
+                                <h3 class="box-title"><a class="detail-icon" href="javascript:;" id="ConditionalSwitch">筛选条件 <i class="fa fa-minus"></i> </a></h3>
+                                <div id="ConditionalContainer">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">邮箱:</label>
+                                                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email" >
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <div class="form-group">
+                                                <label>日期时间:</label>
+                                                <div class="input-group date">
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </div>
+                                                    <input type="text" class="form-control pull-right" id="datetimepicker" value="2012-05-15 21:05" data-date-format="yyyy-mm-dd hh:ii">
+                                                </div>
+                                                <!-- /.input group -->
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-5">
+                                            <div class="form-group">
+                                                <label>时间范围:</label>
+                                                <div class="input-group date">
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </div>
+                                                    <input type="text" class="form-control pull-right" id="datetimepickerStart" value="2012-05-15 21:05" data-date-format="yyyy-mm-dd hh:ii">
+                                                    <span class="input-group-addon">至</span>
+                                                    <input type="text" class="form-control pull-right" id="datetimepickerEnd" value="2012-05-15 21:05" data-date-format="yyyy-mm-dd hh:ii">
+                                                </div>
+                                                <!-- /.input group -->
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-xs-5">
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <button type="button" class="btn btn-block btn-primary" id="btnConditional">检 索</button>
+                                        </div>
+                                        <div class="col-xs-5">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <!-- /.box-header -->
                             <div class="box-body">
@@ -411,6 +461,11 @@ desired effect
     <!-- <script src="@Url.Content("~/Content/AdminLTE-2.4.3/bower_components/bootstrap/dist/js/bootstrap.min.js")"></script> -->
     <script src="@Url.Content("~/Content/AdminLTE-2.4.3/Bootstrap-Table/assets/bootstrap4/js/popper.min.js")"></script>
     <script src="@Url.Content("~/Content/AdminLTE-2.4.3/Bootstrap-Table/assets/bootstrap4/js/bootstrap.min.js")"></script>
+    
+    <!-- bootstrap datetimepicker -->
+    <script src="@Url.Content("~/Content/AdminLTE-2.4.3/bower_components/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.min.js")"></script>
+    <script src="@Url.Content("~/Content/AdminLTE-2.4.3/bower_components/bootstrap-datetimepicker-master/js/locales/bootstrap-datetimepicker.zh-CN.js")"></script>
+
     <!-- AdminLTE App -->
     <script src="@Url.Content("~/Content/AdminLTE-2.4.3/dist/js/adminlte.min.js")"></script>
     <!-- Optionally, you can add Slimscroll and FastClick plugins.
@@ -421,11 +476,31 @@ desired effect
     <script src="@Url.Content("~/Content/AdminLTE-2.4.3/Bootstrap-Table/dist/bootstrap-table.min.js")"></script>
     <!-- Latest compiled and minified Locales -->
     <script src="@Url.Content("~/Content/AdminLTE-2.4.3/Bootstrap-Table/dist/locale/bootstrap-table-zh-CN.min.js")"></script>
+
+    <script src="@Url.Content("~/scripts/ClassBaoJavascript-1.0.0.js")"></script>
+    <script src="@Url.Content("~/scripts/common.js")"></script>
     <script>
         var myTable = $('#table');
         var queryParams = { name: "111" };
 
         $(function () {
+            LoadList();
+            $("#btnConditional").click(function () {
+                LoadList();
+            });
+
+            //datetimepicker
+            $('#datetimepicker, #datetimepickerStart, #datetimepickerEnd').datetimepicker({
+                autoclose: true, // 选中之后自动隐藏日期选择框
+                todayHighlight: true,
+                clearBtn: true, //清除按钮
+                todayBtn: true, //今日按钮
+                language: "zh-CN" //语言设置
+            });
+
+        });
+
+        function LoadList() {
             //先销毁表格
             myTable.bootstrapTable('destroy');
             //初始化表格,动态从服务器加载数据
@@ -503,8 +578,8 @@ desired effect
                     return '这是详细内容：' + index;
                 }
             });
+        }
 
-        });
     </script>
     <!-- Bootstrap-Table Demo JavaScript End xiongzaiqiren -->
 </body>

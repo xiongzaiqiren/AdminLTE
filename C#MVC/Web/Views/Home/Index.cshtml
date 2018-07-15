@@ -6,14 +6,18 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Login >>", "Login", "Account")
+    <a href="/Content/AdminLTE-2.4.3/pages/widgets.html" target="_blank">widgets.html &gt;&gt;</a>
+</p>
+
+<p>
+    @Html.ActionLink("Login >>", "Login", "Account", new RouteValueDictionary() { { "target", "_blank" } })
 </p>
 <p>
-    @Html.ActionLink("Bootstrap-Table Demp >>", "list", "Home")
+    @Html.ActionLink("List 1 >>", "list", "Home", new RouteValueDictionary() { { "target", "_blank" } })
 </p>
 <p>
-    @Html.ActionLink("Bootstrap-Table Demp >>", "list2", "Home")
+    @Html.ActionLink("List 2 >>", "list2", "Home", new RouteValueDictionary() { { "target", "_blank" } })
 </p>
 <p>
-    @Html.ActionLink("Bootstrap-Table Demp >>", "list3", "Home")
+    @Html.ActionLink("List 3 >>", "list3", "Home", new RouteValueDictionary() { { "target", "_blank" } })
 </p>
