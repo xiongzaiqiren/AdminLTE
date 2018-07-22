@@ -21,9 +21,17 @@ function ExpandLeftMenu() {
                 if (!$(element2).is(':has(ul)')) {
                     var href = $(element2).children("a").attr("href");
                     if (!!href) {
-                        if (href.toLowerCase().indexOf(pathname) >= 0) {
-                            //console.log(href);
-                            $(element2).parent().parent("li").addClass("active menu-open");
+                        if ("/" === pathname) {
+                            if (href.toLowerCase() === pathname) {
+                                //console.log(href);
+                                $(element2).parent().parent("li").addClass("active menu-open");
+                            }
+                        }
+                        else {
+                            if (href.toLowerCase().indexOf(pathname) >= 0) {
+                                //console.log(href);
+                                $(element2).parent().parent("li").addClass("active menu-open");
+                            }
                         }
                     }
                     activeLi(element2, pathname);
@@ -38,9 +46,17 @@ function ExpandLeftMenu() {
 function activeLi(element, pathname) {
     var href = $(element).children("a").attr("href");
     if (!!href) {
-        if (href.toLowerCase().indexOf(pathname) >= 0) {
-            //console.log(href);
-            $(element).addClass("active");
+        if ("/" === pathname) {
+            if (href.toLowerCase() === pathname) {
+                //console.log(href);
+                $(element).addClass("active");
+            }
+        }
+        else {
+            if (href.toLowerCase().indexOf(pathname) >= 0) {
+                //console.log(href);
+                $(element).addClass("active");
+            }
         }
     }
 }

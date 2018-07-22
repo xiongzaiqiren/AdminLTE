@@ -1,23 +1,140 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "控制台";
+    Layout = "~/Views/Shared/ConsoleLayout.cshtml";
 }
 
-<h2>Index</h2>
+@section head{
+    <style type="text/css">
+    .info-box-text {
+        line-height: 90px;
+        font-size: 130%;
+    }
+    </style>
+}
 
-<p>
-    <a href="/Content/AdminLTE-2.4.3/pages/widgets.html" target="_blank">widgets.html &gt;&gt;</a>
-</p>
+@section bottom{
+    <script>
+        $(function () {
 
-<p>
-    @Html.ActionLink("Login >>", "Login", "Account", new RouteValueDictionary() { { "target", "_blank" } })
-</p>
-<p>
-    @Html.ActionLink("List 1 >>", "list", "Home", new RouteValueDictionary() { { "target", "_blank" } })
-</p>
-<p>
-    @Html.ActionLink("List 2 >>", "list2", "Home", new RouteValueDictionary() { { "target", "_blank" } })
-</p>
-<p>
-    @Html.ActionLink("List 3 >>", "list3", "Home", new RouteValueDictionary() { { "target", "_blank" } })
-</p>
+        });
+    </script>
+}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            XX系统控制台
+            <small>欢迎回来！</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> 控制台</a></li>
+            <li class="active">桌面</li>
+        </ol>
+    </section>
+    <!-- Main content -->
+    <section class="content container-fluid">
+        <!--------------------------
+          | Your Page Content Here |
+          -------------------------->
+        <!-- Bootstrap-Table Demo Html Start xiongzaiqiren -->
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-success box-solid">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">快捷操作</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+
+                            <p>
+                                <a href="/Content/AdminLTE-2.4.3/pages/widgets.html" target="_blank">widgets.html &gt;&gt;</a>
+                            </p>
+
+                            <p>
+                                @Html.ActionLink("Login >>", "Login", "Account", new RouteValueDictionary() { { "target", "_blank" } })
+                            </p>
+                            <p>
+                                @Html.ActionLink("List 1 >>", "list", "Home", new RouteValueDictionary() { { "target", "_blank" } })
+                            </p>
+                            <p>
+                                @Html.ActionLink("List 2 >>", "list2", "Home", new RouteValueDictionary() { { "target", "_blank" } })
+                            </p>
+                            <p>
+                                @Html.ActionLink("List 3 >>", "list3", "Home", new RouteValueDictionary() { { "target", "_blank" } })
+                            </p>
+
+                            <div class="row">
+                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                    <a href="@Url.Action("Index", "Home")" target="_self">
+                                        <div class="info-box">
+                                            <span class="info-box-icon bg-aqua"><i class="fa fa-envelope-o"></i></span>
+
+                                            <div class="info-box-content">
+                                                <span class="info-box-text">页面1</span>
+                                            </div>
+                                            <!-- /.info-box-content -->
+                                        </div>
+                                        <!-- /.info-box -->
+                                    </a>
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                    <a href="@Url.Action("Index", "Home")" target="_self">
+                                        <div class="info-box">
+                                            <span class="info-box-icon bg-green"><i class="fa fa-flag-o"></i></span>
+
+                                            <div class="info-box-content">
+                                                <span class="info-box-text">页面2</span>
+                                            </div>
+                                            <!-- /.info-box-content -->
+                                        </div>
+                                        <!-- /.info-box -->
+                                    </a>
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                    <a href="@Url.Action("Index", "Home")" target="_self">
+                                        <div class="info-box">
+                                            <span class="info-box-icon bg-yellow"><i class="fa fa-files-o"></i></span>
+
+                                            <div class="info-box-content">
+                                                <span class="info-box-text">页面3</span>
+                                            </div>
+                                            <!-- /.info-box-content -->
+                                        </div>
+                                        <!-- /.info-box -->
+                                    </a>
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                    <a href="@Url.Action("Index", "Home")" target="_self">
+                                        <div class="info-box">
+                                            <span class="info-box-icon bg-red"><i class="fa fa-star-o"></i></span>
+
+                                            <div class="info-box-content">
+                                                <span class="info-box-text">页面4</span>
+                                            </div>
+                                            <!-- /.info-box-content -->
+                                        </div>
+                                        <!-- /.info-box -->
+                                        </a>
+                                </div>
+                                <!-- /.col -->
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+        <!-- Bootstrap-Table Demo Html End xiongzaiqiren -->
+    </section>
+    <!-- /.content -->
+</div>

@@ -77,7 +77,10 @@ namespace Web.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-
+        public ActionResult zTree()
+        {
+            return View();
+        }
 
     }
 }

@@ -7582,6 +7582,7 @@
     <Content Include="Content\AdminLTE-2.4.3\plugins\timepicker\bootstrap-timepicker.min.css" />
     <Content Include="Content\AdminLTE-2.4.3\plugins\timepicker\bootstrap-timepicker.min.js" />
     <Content Include="Content\AdminLTE-2.4.3\respond\respond.min.js" />
+    <Content Include="Content\style.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="scripts\ClassBaoJavascript-1.0.0.js" />
@@ -7593,6 +7594,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -7631,6 +7633,12 @@
     <Content Include="Content\AdminLTE-2.4.3\bower_components\bootstrap-datetimepicker-master\sample in bootstrap v3\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\AdminLTE-2.4.3\bower_components\bootstrap-datetimepicker-master\sample in bootstrap v3\bootstrap\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\AdminLTE-2.4.3\bower_components\bootstrap-datetimepicker-master\tests\README.md" />
+    <Content Include="Views\Shared\ConsoleLayout.cshtml" />
+    <Content Include="Views\Home\zTree.cshtml" />
+    <Content Include="Views\Shared\FooterPartial.cshtml" />
+    <Content Include="Views\Shared\LeftSidebar.cshtml" />
+    <Content Include="Views\Shared\MainHeader.cshtml" />
+    <Content Include="Views\Home\list3 - 复制.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
