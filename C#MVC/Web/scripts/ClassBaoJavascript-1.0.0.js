@@ -997,6 +997,44 @@ ClassBaoJavascript.prototype.DateFormat = function (date, format) {
     if ("object" == typeof (date)) return date.Format(format);
     else { return (new Date(date)).Format(format); }
 }
+
+/*在原有日期基础上增加days天数，默认增加1天*/
+Date.prototype.addDate = function (date, days) {
+    if (!date) {
+        return false;
+    }
+    if (!days || days == '') {
+        days = 1;
+    }
+    var date = new Date(date);
+    date.setDate(date.getDate() + days);
+    return date;
+}
+/*在原有日期基础上增加months月数，默认增加1月*/
+Date.prototype.addMonth = function (date, months) {
+    if (!date) {
+        return false;
+    }
+    if (!months || months == '') {
+        months = 1;
+    }
+    var date = new Date(date);
+    date.setMonth(date.getMonth() + months);
+    return date;
+}
+/*在原有日期基础上增加FullYears年数，默认增加1年*/
+Date.prototype.addFullYear = function (date, FullYears) {
+    if (!date) {
+        return false;
+    }
+    if (!FullYears || FullYears == '') {
+        FullYears = 1;
+    }
+    var date = new Date(date);
+    date.setFullYear(date.getFullYear() + FullYears);
+    return date;
+}
+
 /*短时间，形如 (13:04:06)*/
 ClassBaoJavascript.prototype.isTime = function (str) {
 	var m = str.match(/^(\d{1,2})(:)?(\d{1,2})\2(\d{1,2})$/);
