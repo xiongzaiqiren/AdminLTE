@@ -13,6 +13,10 @@ namespace Web.Controllers
         {
             return View();
         }
+        public ActionResult jqueryuiDialog()
+        {
+            return View();
+        }
 
         public ActionResult list()
         {

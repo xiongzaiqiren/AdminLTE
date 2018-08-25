@@ -7639,6 +7639,7 @@
     <Content Include="Views\Shared\LeftSidebar.cshtml" />
     <Content Include="Views\Shared\MainHeader.cshtml" />
     <Content Include="Views\Home\list3 - 复制.cshtml" />
+    <Content Include="Views\Home\jqueryuiDialog.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

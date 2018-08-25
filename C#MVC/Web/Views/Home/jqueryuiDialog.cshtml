@@ -1,0 +1,106 @@
+﻿
+@{
+    ViewBag.Title = "控制台";
+    Layout = "~/Views/Shared/ConsoleLayout.cshtml";
+}
+
+@section head{
+    @*<link href="~/Content/AdminLTE-2.4.3/bower_components/jquery-ui/themes/cupertino/jquery-ui.min.css" rel="stylesheet" />*@
+    @*<link href="~/Content/AdminLTE-2.4.3/bower_components/jquery-ui/themes/flick/jquery-ui.min.css" rel="stylesheet" />*@
+    @*<link href="~/Content/AdminLTE-2.4.3/bower_components/jquery-ui/themes/redmond/jquery-ui.min.css" rel="stylesheet" />*@
+    <link href="~/Content/AdminLTE-2.4.3/bower_components/jquery-ui/themes/start/jquery-ui.min.css" rel="stylesheet" />
+    <style type="text/css">
+        .info-box-text {
+            line-height: 90px;
+            font-size: 130%;
+        }
+    </style>
+
+}
+
+@section bottom{
+    <script src="~/Content/AdminLTE-2.4.3/bower_components/jquery-ui/jquery-ui.min.js"></script>
+    <script>
+        $(function () {
+            $("#dialog").dialog({
+                modal: true,
+                classes: {
+                    "ui-dialog": "highlight"
+                },
+                title: "我的 Dialog ",
+                buttons: [
+                    {
+                        text: "确定",
+                        icon: "ui-icon-heart",
+                        class:"btnOk",
+                        click: function () {
+                            $(this).dialog("close");
+                        }
+                    },
+                    {
+                        text: "取消",
+                        icon: "ui-icon-heart",
+                        class: "btnCancel",
+                        click: function () {
+                            $(this).dialog("close");
+                        }
+                    }
+                ]
+            });
+        });
+    </script>
+}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            XX系统控制台
+            <small>欢迎回来！</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> 控制台</a></li>
+            <li class="active">桌面</li>
+        </ol>
+    </section>
+    <!-- Main content -->
+    <section class="content container-fluid">
+        <!--------------------------
+          | Your Page Content Here |
+          -------------------------->
+        <!-- Bootstrap-Table Demo Html Start xiongzaiqiren -->
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-success box-solid">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">快捷操作</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+
+                            <p>
+                                <a href="http://api.jqueryui.com/demos/" target="_blank">http://api.jqueryui.com/demos/ &gt;&gt;</a><br />
+                                <a href="http://api.jqueryui.com/themeroller/" target="_blank">http://api.jqueryui.com/themeroller/ &gt;&gt;</a><br />
+                                <a href="http://api.jqueryui.com/dialog/" target="_blank">http://api.jqueryui.com/dialog/ &gt;&gt;</a><br />
+                                <a href="http://api.jqueryui.com/autocomplete/" target="_blank">http://api.jqueryui.com/autocomplete/ &gt;&gt;</a><br />
+                            </p>
+
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+        <!-- Bootstrap-Table Demo Html End xiongzaiqiren -->
+    </section>
+    <!-- /.content -->
+</div>
+
+<div id="dialog" title="基本的对话框">
+    <p>这是一个默认的对话框，用于显示信息。对话框窗口可以移动，调整尺寸，默认可通过 'x' 图标关闭。</p>
+    <p><a href="http://api.jqueryui.com/dialog/"> http://api.jqueryui.com/dialog/ </a> </p>
+</div>
