@@ -6,7 +6,7 @@
 * Blog: http://xiongzaiqiren.blog.163.com/
 * E-mail: xiongzaiqiren@163.com
 * Last modified: xiongzaiqiren
-* Last modified time: 2017-11-7 18:01
+* Last modified time: 2018-11-28 15:54
 * Version source: https://github.com/classbao/ClassBaoJavascript
 ***/
 
@@ -907,6 +907,126 @@ function ClassBaoJavascript() {
         }
     };
 
+    /* HTML5的canvas相关插件 */
+    this.canvas = {
+        context: null
+        /* CanvasRenderingContext2D */
+            , getContext: function (canvasId) {
+                if (!!this.context && "CanvasRenderingContext2D" === this.context.constructor.name) {
+                    return this.context;
+                }
+
+                var c = document.getElementById(canvasId || "myCanvas");
+                this.context = c.getContext("2d");
+                return this.context;
+            }
+        /* canvas把正方形图片绘制成圆形。ctx是CanvasRenderingContext2D，img是Image对象、或http/https图片，x，y是左上角坐标，r是圆半径 */
+            , circleImg: function (ctx, img, x, y, r) {
+                ctx.save();
+                var d = 2 * r;
+                var cx = x + r;
+                var cy = y + r;
+                ctx.beginPath(); //开始绘制
+                //先画个圆   前两个参数确定了圆心 （x,y） 坐标  第三个参数是圆的半径  四参数是绘图方向  默认是false，即顺时针
+                ctx.arc(cx, cy, r, 0, 2 * Math.PI);
+                //画好了圆 剪切  原始画布中剪切任意形状和尺寸。一旦剪切了某个区域，则所有之后的绘图都会被限制在被剪切的区域内 这也是我们要save上下文的原因
+                ctx.clip();
+                // 推进去图片，必须是http/https图片
+                ctx.drawImage(img, x, y, d, d);
+                //恢复之前保存的绘图上下文 恢复之前保存的绘图上下午即状态 还可以继续绘制
+                ctx.restore();
+                //可将之前在绘图上下文中的描述（路径、变形、样式）画到 canvas 中
+                //ctx.draw();
+            }
+
+        /*调用示例： downloadFile(canvas.toDataURL("image/png"), 'ship.png'); */
+            , downloadFile: function (content, fileName) {
+
+                var aLink = document.createElement('a');
+                var blob = this.base64Img2Blob(content); //new Blob([content]);
+
+                var evt = document.createEvent("HTMLEvents");
+                evt.initEvent("click", false, false);//initEvent 不加后两个参数在FF下会报错
+                aLink.download = fileName || ('下载图片名称' + new Date().toLocaleDateString());
+                aLink.href = URL.createObjectURL(blob);
+
+                aLink.dispatchEvent(evt);
+            }
+            , base64Img2Blob: function (code) {
+                var parts = code.split(';base64,');
+                var contentType = parts[0].split(':')[1];
+                var raw = window.atob(parts[1]);
+                var rawLength = raw.length;
+
+                var uInt8Array = new Uint8Array(rawLength);
+
+                for (var i = 0; i < rawLength; ++i) {
+                    uInt8Array[i] = raw.charCodeAt(i);
+                }
+
+                return new Blob([uInt8Array], { type: contentType });
+            }
+
+        /*调用示例： downloadIamge(document.getElementById('tulip').src, "fileName"); */
+        , downloadIamge: function (imageSrc, fileName) {
+            var image = new Image();
+            // 解决跨域 Canvas 污染问题
+            image.setAttribute('crossOrigin', 'anonymous');
+            image.onload = function () {
+                var canvas = document.createElement('canvas');
+                canvas.width = image.width;
+                canvas.height = image.height;
+
+                var context = canvas.getContext('2d');
+                context.drawImage(image, 0, 0, image.width, image.height);
+                var url = canvas.toDataURL('image/png');
+
+                //将图片保存到本地
+                var saveFile = function (imgdata, fileName) {
+                    // 生成一个a元素
+                    var a = document.createElement('a');
+                    // 创建一个单击事件
+                    var event = new MouseEvent('click');
+
+                    // 将a的download属性设置为我们想要下载的图片名称，若name不存在则使用‘下载图片名称’作为默认名称
+                    a.download = fileName || ('下载图片名称' + new Date().toLocaleDateString());
+                    // 将生成的URL设置为a.href属性
+                    a.href = imgdata;
+
+                    // 触发a的单击事件
+                    a.dispatchEvent(event);
+                }
+                saveFile(url, fileName);
+            }
+            image.src = imageSrc;
+        }
+
+        /* 图片下载操作，指定图片类型。调用示例： download(document.getElementById('canvas1'), 'png' , 'fileName'); */
+        , downloadCanvas: function (canvas, type, fileName) {
+            //设置保存图片的类型
+            var imgdata = canvas.toDataURL(type);
+            //将mime-type改为image/octet-stream,强制让浏览器下载
+            var fixtype = function (type) {
+                type = type.toLocaleLowerCase().replace(/jpg/i, 'jpeg');
+                var r = type.match(/png|jpeg|bmp|gif/)[0];
+                return 'image/' + r;
+            }
+            imgdata = imgdata.replace(fixtype(type), 'image/octet-stream')
+            //将图片保存到本地
+            var saveFile = function (data, filename) {
+                var link = document.createElement('a');
+                link.href = data;
+                link.download = filename;
+                var event = document.createEvent('MouseEvents');
+                event.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+                link.dispatchEvent(event);
+            }
+            filename = fileName || ('下载图片名称' + new Date().toLocaleDateString());
+            saveFile(imgdata, filename + '.' + type);
+        }
+        ////////////////////////////////////////
+    };
+
 };
 
 
@@ -1708,3 +1828,22 @@ if (!CBJS || typeof (CBJS) != "object") {
     CBJS = new ClassBaoJavascript();
 };
 /***** End *****/
+
+
+
+/***** Other Start *****/
+
+/*window.requestAnimationFrame 的兼容*/
+if (!window.requestAnimationFrame) {
+    window.requestAnimationFrame = (
+      window.webkitRequestAnimationFrame ||
+      window.mozRequestAnimationFrame ||
+      window.msRquestAniamtionFrame ||
+      window.oRequestAnimationFrame ||
+      function (callback) {
+          return setTimeout(callback, Math.floor(1000 / 60))
+      }
+  );
+};
+
+/***** Other End *****/

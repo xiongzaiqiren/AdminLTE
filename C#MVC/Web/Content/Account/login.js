@@ -21,7 +21,7 @@ $(document).keydown(function (event) {
         //SubmitForm();
         SubmitAjax();
     }
-    console.log(event.keyCode);
+    //console.log(event.keyCode);
 });
 /*不能有空格*/
 $("input").keypress(function () {
@@ -55,26 +55,35 @@ function SubmitAjax() {
     var loginType = $("#loginType").val();
     var loginEmail = $("#loginEmail").val();
     var loginPwd = $("#loginPwd").val();
+    var loginCheckCode = $("#loginCheckCode").val();
     var loginRememberMe = $("#loginRememberMe").is(':checked');
 
-    if (!loginType) {
-        alert("请选择类型！");
-        return false;
-    }
+    //if (!loginType) {
+    //    alert("请选择类型！");
+    //    showAlert('请选择类型！');
+    //    return false;
+    //}
     if (!loginEmail || loginEmail.length < 5) {
-        alert("请输入Email/Mobile phone！");
+        //alert("请输入Email/Mobile phone！");
+        showAlert('请输入Email/Mobile phone！');
         return false;
     }
     if (!loginPwd || loginPwd.length < 5) {
-        alert("请输入密码！");
+        //alert("请输入密码！");
+        showAlert('请输入密码！');
+        return false;
+    }
+    if (!loginCheckCode || loginCheckCode.length < 4) {
+        //alert("请输入验证码！");
+        showAlert('请输入验证码！');
         return false;
     }
 
     $.ajax({
-        //url: JsConfig.domain + "/Account/Login",
-        url: "/Account/Login",
+        url: JsConfig.domain + "/Account/Login",
+        //url: "/Account/Login",
         data: {
-            loginType: loginType,
+            loginType: loginType||0,
             loginEmail: loginEmail,
             loginPwd: loginPwd,
             loginRememberMe: loginRememberMe
@@ -86,30 +95,27 @@ function SubmitAjax() {
         },
         dataFilter: function (data, type) {
             if (("json" === type || "jsonp" === type) && "object" === typeof (data)) {
+                return data;
             }
+            return data;
         },
         success: function (data) {
-            if (data.status == "200") {
-                alert("登录成功");
+            if (data.Status == 200) {
+                //alert("登录成功");
+                showMsg("登录成功");
                 if (!!loginRememberMe) {
                     //记住我
                 }
 
                 var rtn = CBJS.getUrlParamValue("rtn");
                 if (!rtn)
-                    rtn = "/Menu/Index";
+                    rtn = "/Home/Index";
                 location.href = rtn;
                 //window.location.href = "/scholar/viewpointlist?t=" + (new Date()).getTime();
             }
-            else if (data.status == "500") {
-                alert("服务器端处理错误");
-            }
-            else if (data.status == "-100") {
-                alert(data.result);
-                return;
-            }
             else {
-                alert(JSON.stringify(data));
+                showAlert(data.Message);
+                //alert(JSON.stringify(data));
                 return;
             }
         },

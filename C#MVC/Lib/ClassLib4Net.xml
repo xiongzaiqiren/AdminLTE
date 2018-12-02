@@ -1909,33 +1909,33 @@
             <summary>
             Unix时间戳转换为标准时间格式（基准时间为"1970-1-1 08:00:00"）
             </summary>
-            <param name="TimeStamp">时间戳</param>
+            <param name="TimeStamp">时间戳（10位）</param>
             <returns>标准时间格式</returns>
         </member>
         <member name="M:ClassLib4Net.ConvertHelper.TimeStamp(System.DateTime)">
             <summary>
-            标准时间格式转换为Unix时间戳（基准时间为"1970-1-1 08:00:00"）
+            标准时间格式转换为Unix时间戳，秒/10位（基准时间为"1970-1-1 08:00:00"）
             </summary>
             <param name="time">标准时间格式</param>
             <returns>时间戳</returns>
         </member>
         <member name="M:ClassLib4Net.ConvertHelper.TimeStampToLocalTime(System.Double)">
             <summary>
-            将Unix时间戳转换为DateTime类型时间，精确到毫秒（基准时间为"1970-1-1 00:00:00"转换成当前计算机的时区的时间）
+            将Unix时间戳转换为DateTime类型时间，精确到毫秒/13位（基准时间为"1970-1-1 00:00:00"转换成当前计算机的时区的时间）
             </summary>
-            <param name="timestamp">double 型数字</param>
+            <param name="timestamp">double 型数字（13位）</param>
             <returns>DateTime</returns>
         </member>
         <member name="M:ClassLib4Net.ConvertHelper.TimeStampToLocalTime(System.DateTime)">
             <summary>
-            DateTime时间格式转换为Unix时间戳格式，精确到毫秒（基准时间为"1970-1-1 00:00:00"转换成当前计算机的时区的时间）
+            DateTime时间格式转换为Unix时间戳格式，精确到毫秒/13位（基准时间为"1970-1-1 00:00:00"转换成当前计算机的时区的时间）
             </summary>
             <param name="time">DateTime时间</param>
             <returns>时间戳</returns>
         </member>
         <member name="M:ClassLib4Net.ConvertHelper.TimeStampByKind(System.DateTime)">
             <summary>
-            日期转换成unix时间戳（基准时间为"1970-1-1 00:00:00.000"，并通过target.Kind来控制基于本地时间、协调世界时间UTC，还是两者皆否）
+            日期转换成unix时间戳，精确到秒/10位（基准时间为"1970-1-1 00:00:00.000"，并通过target.Kind来控制基于本地时间、协调世界时间UTC，还是两者皆否）
             </summary>
             <param name="dateTime">时间对象</param>
             <returns></returns>
@@ -1945,8 +1945,39 @@
             unix时间戳转换成日期（基准时间为"1970-1-1 00:00:00.000"，并通过target.Kind来控制基于本地时间、协调世界时间UTC，还是两者皆否）
             </summary>
             <param name="target">参考DateTime对象（通过target.Kind来控制基于本地时间、协调世界时间UTC，还是两者皆否）</param>
-            <param name="timestamp">时间戳（秒）</param>
+            <param name="timestamp">时间戳（秒/10位）</param>
             <returns></returns>
+        </member>
+        <member name="M:ClassLib4Net.ConvertHelper.GMTString(System.DateTime)">
+            <summary>  
+            本地时间转成GMT时间。
+            string s = ToGMTString(DateTime.Now); 
+            本地时间为：2016-6-30 10:04:39 
+            转换后的时间为：Thu, 30 Jun 2016 2:04:39 GMT
+            </summary>
+            <param name="dateTime">DateTime</param>
+            <returns></returns>
+        </member>
+        <member name="M:ClassLib4Net.ConvertHelper.GMTByTimezone(System.DateTime)">
+            <summary>  
+            本地时间转成GMT格式的时间。
+            string s = ToGMTFormat(DateTime.Now); 
+            本地时间为：2016-6-30 10:04:39 
+            转换后的时间为：Thu, 30 Jun 2016 10:04:39 GMT+0800
+            </summary>  
+            <param name="dateTime">DateTime</param>
+            <returns></returns>
+        </member>
+        <member name="M:ClassLib4Net.ConvertHelper.GMT2Local(System.String)">
+            <summary>  
+            GMT时间转成本地时间。
+            DateTime dt1 = GMT2Local("Thu, 30 Jun 2016 02:04:39 GMT"); 
+            转换后的dt1为：2016-6-30 10:04:39 
+            DateTime dt2 = GMT2Local("Thu, 30 Jun 2016 10:04:39 GMT+0800");
+            转换后的dt2为：2016-6-30 10:04:39
+            </summary>  
+            <param name="gmt">字符串形式的GMT时间</param>  
+            <returns></returns>  
         </member>
         <member name="T:ClassLib4Net.CookieHelper">
             <summary>
@@ -7444,7 +7475,8 @@
         </member>
         <member name="M:ClassLib4Net.Encrypt.MD5Helper.MD5Encrypt(System.String,System.Text.Encoding)">
             <summary>
-            MD5方式加密字符串的方法
+            MD5方式加密字符串的方法。
+            基于Md5的自定义加密字符串方法：输入一个字符串，返回一个由32个字符组成的十六进制的哈希散列（字符串）。
             </summary>
             <param name="text">要进行加密的字符串</param>
             <param name="encoding">字符串编码格式</param>
@@ -7452,21 +7484,24 @@
         </member>
         <member name="M:ClassLib4Net.Encrypt.MD5Helper.MD5Encrypt(System.String)">
             <summary>
-            MD5方式加密字符串的方法（utf-8编码）
+            MD5方式加密字符串的方法（utf-8编码）。
+            基于Md5的自定义加密字符串方法：输入一个字符串，返回一个由32个字符组成的十六进制的哈希散列（字符串）。
             </summary>
             <param name="text">要进行加密的字符串</param>
             <returns>加密后的字符串</returns>
         </member>
         <member name="M:ClassLib4Net.Encrypt.MD5Helper.MD5Hash(System.String)">
             <summary>
-            使用默认编码进行标准MD5加密
+            使用默认编码进行标准MD5加密。
+            基于Md5的自定义加密字符串方法：输入一个字符串，返回一个由32个字符组成的十六进制的哈希散列（字符串）。
             </summary>
             <param name="strText">text</param>
             <returns>md5 Encrypt string</returns>
         </member>
         <member name="M:ClassLib4Net.Encrypt.MD5Helper.MD5Hash(System.String,System.Text.Encoding)">
             <summary>
-            标准MD5加密
+            标准MD5加密。
+            基于Md5的自定义加密字符串方法：输入一个字符串，返回一个由32个字符组成的十六进制的哈希散列（字符串）。
             </summary>
             <param name="strText">text</param>
             <param name="encoding">编码方式</param>
@@ -7498,7 +7533,8 @@
         </member>
         <member name="M:ClassLib4Net.Encrypt.SHA1Helper.SHA1Encrypt(System.String,System.Text.Encoding)">
             <summary>
-            SHA1方式加密字符串的方法
+            SHA1方式加密字符串的方法。
+            基于Sha1的自定义加密字符串方法：输入一个字符串，返回一个由40个字符组成的十六进制的哈希散列（字符串）。
             </summary>
             <param name="text">要进行加密的字符串</param>
             <param name="encoding">字符串编码格式</param>
@@ -7506,7 +7542,8 @@
         </member>
         <member name="M:ClassLib4Net.Encrypt.SHA1Helper.SHA1Encrypt(System.String)">
             <summary>
-            SHA1方式加密字符串的方法（utf-8编码）
+            SHA1方式加密字符串的方法（utf-8编码）。
+            基于Sha1的自定义加密字符串方法：输入一个字符串，返回一个由40个字符组成的十六进制的哈希散列（字符串）。
             </summary>
             <param name="text">要进行加密的字符串</param>
             <returns>加密后的字符串</returns>
@@ -8007,7 +8044,26 @@
             <param name="key"></param>
             <returns></returns>
         </member>
+        <member name="M:ClassLib4Net.Extension.Dictionary.DictionaryExtensions.GetValue``1(System.Collections.Generic.SortedDictionary{System.String,``0},System.String)">
+            <summary>
+            根据key获取value
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dictionary"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
         <member name="M:ClassLib4Net.Extension.Dictionary.DictionaryExtensions.GetValue``1(System.Collections.Generic.Dictionary{System.String,``0},System.String,``0)">
+            <summary>
+            根据key获取value
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dictionary"></param>
+            <param name="key"></param>
+            <param name="defaultValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ClassLib4Net.Extension.Dictionary.DictionaryExtensions.GetValue``1(System.Collections.Generic.SortedDictionary{System.String,``0},System.String,``0)">
             <summary>
             根据key获取value
             </summary>
@@ -8027,7 +8083,27 @@
             <param name="value"></param>
             <returns></returns>
         </member>
+        <member name="M:ClassLib4Net.Extension.Dictionary.DictionaryExtensions.AddValue``1(System.Collections.Generic.SortedDictionary{System.String,``0},System.String,``0)">
+            <summary>
+            添加键值对数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dictionary"></param>
+            <param name="key"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
         <member name="M:ClassLib4Net.Extension.Dictionary.DictionaryExtensions.AddValues``1(System.Collections.Generic.Dictionary{System.String,``0},System.String[],``0[])">
+            <summary>
+            添加键值对数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dictionary"></param>
+            <param name="keys"></param>
+            <param name="values"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ClassLib4Net.Extension.Dictionary.DictionaryExtensions.AddValues``1(System.Collections.Generic.SortedDictionary{System.String,``0},System.String[],``0[])">
             <summary>
             添加键值对数据
             </summary>
@@ -8045,11 +8121,22 @@
             <param name="isAsc">参数（键值对）字典的主键排序方式</param>
             <returns></returns>
         </member>
-        <member name="M:ClassLib4Net.Extension.Dictionary.DictionaryExtensions.ToURLParameter(System.Collections.Generic.Dictionary{System.String,System.String})">
+        <member name="M:ClassLib4Net.Extension.Dictionary.DictionaryExtensions.ToURLParameter(System.Collections.Generic.Dictionary{System.String,System.String},System.Boolean,System.Boolean)">
             <summary>
             将参数字典转换成URL键值对的格式（即 key1=value1&amp;key2=value2…）
             </summary>
             <param name="dictionary">参数（键值对）字典</param>
+            <param name="removeEmpty">是否排除空项（健或值为空或空字符串）</param>
+            <param name="urlEncode">是否Value进行URL编码</param>
+            <returns></returns>
+        </member>
+        <member name="M:ClassLib4Net.Extension.Dictionary.DictionaryExtensions.ToURLParameter(System.Collections.Generic.SortedDictionary{System.String,System.String},System.Boolean,System.Boolean)">
+            <summary>
+            将参数字典转换成URL键值对的格式（即 key1=value1&amp;key2=value2…）
+            </summary>
+            <param name="sd">参数（键值对）字典</param>
+            <param name="removeEmpty">是否排除空项（健或值为空或空字符串）</param>
+            <param name="urlEncode">是否Value进行URL编码</param>
             <returns></returns>
         </member>
         <member name="T:ClassLib4Net.Extension.Enum.EnumExtensions">
