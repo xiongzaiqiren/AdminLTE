@@ -36,4 +36,13 @@ namespace Model
         public DateTime CreateTime { get; set; }
         public DateTime UpdateTime { get; set; }
     }
+
+    public class AdminRoleQuery:RequestQuery
+    {
+        public string RoleName { get; set; }
+
+        public string StartTime { get; set; }
+
+        public string EndTime { get; set; }
+    }
 }
