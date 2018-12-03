@@ -221,38 +221,38 @@ namespace DAL.Admins
                 return ret;
             }
         }
-        public List<AdminRole> GetAdminRoleList(AdminRoleQuery model)
-        {
-            List<AdminRole> r = new List<AdminRole>();
+        //public List<AdminRole> GetAdminRoleList(AdminRoleQuery model)
+        //{
+        //    List<AdminRole> r = new List<AdminRole>();
 
-            using (MySqlContext context = new MySqlContext(Db))
-            {
-                StringBuilder sql = new StringBuilder();
-                sql.Append(@"select  where 1=1 ");
-                StringBuilder sqlCount = new StringBuilder();
-                sqlCount.Append(@"select count(1) from t_workorder  where 1=1");
-                List<DbParam> _listDbParam = new List<DbParam>();
-                if (!string.IsNullOrWhiteSpace(model.StartTime))
-                {
-                    sql.Append(" and w.CreateTime>= ?starttime ");
-                    sqlCount.Append(" and w.CreateTime>= ?starttime ");
-                    _listDbParam.Add(new DbParam("?starttime", "" + model.StartTime + ""));
-                }
-                if (!string.IsNullOrWhiteSpace(model.EndTime))
-                {
-                    sql.Append(" and w.CreateTime<= ?endtime ");
-                    sqlCount.Append(" and w.CreateTime<= ?endtime ");
-                    _listDbParam.Add(new DbParam("?endtime", "" + model.EndTime + ""));
-                }
+        //    using (MySqlContext context = new MySqlContext(Db))
+        //    {
+        //        StringBuilder sql = new StringBuilder();
+        //        sql.Append(@"select  where 1=1 ");
+        //        StringBuilder sqlCount = new StringBuilder();
+        //        sqlCount.Append(@"select count(1) from t_workorder  where 1=1");
+        //        List<DbParam> _listDbParam = new List<DbParam>();
+        //        if (!string.IsNullOrWhiteSpace(model.StartTime))
+        //        {
+        //            sql.Append(" and w.CreateTime>= ?starttime ");
+        //            sqlCount.Append(" and w.CreateTime>= ?starttime ");
+        //            _listDbParam.Add(new DbParam("?starttime", "" + model.StartTime + ""));
+        //        }
+        //        if (!string.IsNullOrWhiteSpace(model.EndTime))
+        //        {
+        //            sql.Append(" and w.CreateTime<= ?endtime ");
+        //            sqlCount.Append(" and w.CreateTime<= ?endtime ");
+        //            _listDbParam.Add(new DbParam("?endtime", "" + model.EndTime + ""));
+        //        }
                 
-                sql.Append(" order by  w.ID desc  limit " + (model.pageNumber - 1) * model.pageSize + ", " + model.pageSize);
-                var result = context.SqlQuery<AdminRole>(sql.ToString(), _listDbParam.ToArray()).ToList();
-                var resultCnt = context.SqlQuery<int>(sqlCount.ToString(), _listDbParam.ToArray()).FirstOrDefault();
+        //        sql.Append(" order by  w.ID desc  limit " + (model.pageNumber - 1) * model.pageSize + ", " + model.pageSize);
+        //        var result = context.SqlQuery<AdminRole>(sql.ToString(), _listDbParam.ToArray()).ToList();
+        //        var resultCnt = context.SqlQuery<int>(sqlCount.ToString(), _listDbParam.ToArray()).FirstOrDefault();
                
 
-            }
+        //    }
 
-        }
+        //}
         #endregion
 
     }
