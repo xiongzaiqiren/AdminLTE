@@ -223,7 +223,8 @@ namespace DAL.Admins
         }
         public List<AdminRole> GetAdminRoleList(AdminRoleQuery model)
         {
-           
+            List<AdminRole> r = new List<AdminRole>();
+
             using (MySqlContext context = new MySqlContext(Db))
             {
                 StringBuilder sql = new StringBuilder();
@@ -247,13 +248,7 @@ namespace DAL.Admins
                 sql.Append(" order by  w.ID desc  limit " + (model.pageNumber - 1) * model.pageSize + ", " + model.pageSize);
                 var result = context.SqlQuery<AdminRole>(sql.ToString(), _listDbParam.ToArray()).ToList();
                 var resultCnt = context.SqlQuery<int>(sqlCount.ToString(), _listDbParam.ToArray()).FirstOrDefault();
-                if (result != null)
-                {
-                    r.Code = ResultCode.Success;
-                    r.Data = result;
-                    r.Count = resultCnt;
-                }
-                return r;
+               
 
             }
 
