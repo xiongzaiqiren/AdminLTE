@@ -53,7 +53,7 @@ namespace Model
         private int _pageSize;
         public int pageSize
         {
-            get { if (_pageSize <= 0) return 10; return _pageSize}
+            get { if (_pageSize <= 0) return 10; return _pageSize; }
             set { _pageSize = value; }
         }
         private int _pageNumber;
