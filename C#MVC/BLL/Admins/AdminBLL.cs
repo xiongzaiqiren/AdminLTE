@@ -90,6 +90,11 @@ namespace BLL.Admins
 
         #endregion
 
+        /// <summary>
+        /// 根据用户名/Email/MobilePhone查询
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public ApiDataModel<Model.ResultModel.AdminLogin> Login(string name, string pwd)
         {
             var result = new ApiDataModel<Model.ResultModel.AdminLogin>(new Model.ResultModel.AdminLogin());
@@ -141,6 +146,23 @@ namespace BLL.Admins
 
 
         }
+        /// <summary>
+        /// 更新登录信息
+        /// </summary>
+        /// <param name="AdminID"></param>
+        /// <param name="LastLoginIP"></param>
+        /// <returns></returns>
+        public int UpdateLogin(int AdminID, string LastLoginIP)
+        {
+            if(AdminID < 1)
+            {
+                return 0;
+            }
+
+            return DataRepository.adminManageDAL.UpdateLogin(AdminID, DateTime.Now, LastLoginIP);
+        }
+
+
 
     }
 }

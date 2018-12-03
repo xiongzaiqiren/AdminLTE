@@ -12,6 +12,7 @@ using Web.Models;
 
 namespace Web.Controllers
 {
+    //[WebMvcAuthorize(Roles =new LoginRole[] { LoginRole.admin }  )]
     public class AccountController : Controller
     {
         // GET: Account
@@ -34,9 +35,17 @@ namespace Web.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public ActionResult Login(int loginType, string loginEmail, string loginPwd, bool loginRememberMe)
+        public ActionResult Login(int loginType, string loginEmail, string loginPwd, string loginCheckCode, bool loginRememberMe)
         {
-            var result = BLLRepository.adminBLL.Login(loginEmail, loginPwd);
+            var result = new ApiDataModel<Model.ResultModel.AdminLogin>(new Model.ResultModel.AdminLogin());
+            if(loginCheckCode != ClassLib4Net.SessionHelper.GetValue<String>(Handler.CheckCodeImg.key))
+            {
+                result.Status = StatusCode.ValidateCode.GetHashCode();
+                result.Message = StatusCode.ValidateCode.Language();
+                return Json(result);
+            }
+
+            result = BLLRepository.adminBLL.Login(loginEmail, loginPwd);
             if(null != result && StatusCode.Success.GetHashCode() == result.Status)
             {
                 //登录成功
@@ -48,6 +57,16 @@ namespace Web.Controllers
                 aa.loginRememberMe = loginRememberMe;
 
                 AccessService.Account = aa;
+
+                if(null != AccessService.Account && AccessService.Account.ID > 0)
+                {
+                    BLLRepository.adminBLL.UpdateLogin(aa.ID, WebHelper.GetIP);
+                }
+                else
+                {
+                    result.Status = StatusCode.LoginEx.GetHashCode();
+                    result.Message = StatusCode.LoginEx.Language();
+                }
             }
 
             return Json(result);
@@ -56,8 +75,8 @@ namespace Web.Controllers
         [AllowAnonymous]
         public ActionResult Logout()
         {
-            ClassLib4Net.SessionHelper.Remove("");
-            return View();
+            AccessService.RemoveAccount();
+            return RedirectToAction("Login");
         }
 
     }

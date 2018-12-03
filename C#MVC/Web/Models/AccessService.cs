@@ -18,7 +18,7 @@ namespace Web.Models
     public class AccessAccount
     {
         [DataMember]
-        public long ID { get; set; }
+        public int ID { get; set; }
         [DataMember]
         public string Name { get; set; }
         [DataMember]
@@ -33,7 +33,7 @@ namespace Web.Models
         public LoginRole Role { get; set; }
 
         public AccessAccount() { }
-        public AccessAccount(long ID, string Name, LoginRole Role) : base()
+        public AccessAccount(int ID, string Name, LoginRole Role) : base()
         {
             this.ID = ID;
             this.Name = Name;
@@ -134,6 +134,7 @@ namespace Web.Models
             if(HttpContext.Current.Session[key] != null)
             {
                 HttpContext.Current.Session.Remove(key);
+                HttpContext.Current.Session.Clear();
                 HttpContext.Current.Session.Abandon();
             }
 

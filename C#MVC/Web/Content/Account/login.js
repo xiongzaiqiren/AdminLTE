@@ -86,6 +86,7 @@ function SubmitAjax() {
             loginType: loginType||0,
             loginEmail: loginEmail,
             loginPwd: loginPwd,
+            loginCheckCode:loginCheckCode,
             loginRememberMe: loginRememberMe
         },
         dataType: "json",

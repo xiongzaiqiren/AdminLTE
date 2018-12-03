@@ -131,6 +131,11 @@ namespace DAL.Admins
 
         #endregion
 
+        /// <summary>
+        /// 根据用户名/Email/MobilePhone查询
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public Admin Select(string name)
         {
             using(MySqlContext context = new MySqlContext(Db))
@@ -138,6 +143,28 @@ namespace DAL.Admins
                 IQuery<Admin> q = context.Query<Admin>();
                 return q.Where(a => a.UserName == name || a.Email == name || a.MobilePhone == name).FirstOrDefault();
             }
+        }
+        /// <summary>
+        /// 更新登录信息
+        /// </summary>
+        /// <param name="AdminID"></param>
+        /// <param name="LastLoginTime"></param>
+        /// <param name="LastLoginIP"></param>
+        /// <returns></returns>
+        public int UpdateLogin(int AdminID, DateTime LastLoginTime, string LastLoginIP)
+        {
+            int result;
+            using(MySqlContext context = new MySqlContext(Db))
+            {
+                /* tips：必须在 lambda 里写 new User() */
+                result = context.Update<Admin>(a => a.AdminID == AdminID, a => new Admin()
+                {
+                    LastLoginTime = LastLoginTime,
+                    LastLoginIP = LastLoginIP,
+                    LoginCount = a.LoginCount + 1
+                });
+            }
+            return result;
         }
 
         #region 角色操作
