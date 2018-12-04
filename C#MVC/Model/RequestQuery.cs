@@ -30,7 +30,7 @@ namespace Model
                 return (pageNumber - 1) * pageSize;
             }
         }
-
+        public int Count { get; set; }
         public string searchText { get; set; }
         public string sortName { get; set; }
         public string sortOrder { get; set; }
