@@ -162,7 +162,150 @@ namespace BLL.Admins
             return DataRepository.adminManageDAL.UpdateLogin(AdminID, DateTime.Now, LastLoginIP);
         }
 
+        #region 角色操作
+        /// <summary>
+        /// 插入角色
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public ApiDataModel<int> InsertAdminRole(AdminRole entity)
+        {
+            ApiDataModel<int> result = new ApiDataModel<int>();
+            if (string.IsNullOrWhiteSpace(entity.AdminRoleName))
+            {
+                result.Status = StatusCode.ParamError.GetHashCode();
+                result.Message = "请输入角色名称";
+                return result;
+            }
+            if(entity.AdminRoleStatus<0)
+            {
+                result.Status = StatusCode.ParamError.GetHashCode();
+                result.Message = "请选择角色状态";
+                return result;
+            }
+            var model = DataRepository.adminManageDAL.InsertAdminRole(entity);
+            if(model!=null)
+            {
+                result.Status = StatusCode.Success.GetHashCode();
+                result.Message = "操作成功";
+               
+            }
+            else
+            {
+                result.Status = StatusCode.Fail.GetHashCode();
+                result.Message = "操作失败";
+            }
+            return result;
+        }
+        /// <summary>
+        /// 更新角色
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public ApiDataModel<int> UpdateAdminRole(AdminRole entity)
+        {
+            ApiDataModel<int> result = new ApiDataModel<int>();
+            if(entity.AdminRoleID<=0)
+            {
+                result.Status = StatusCode.ParamError.GetHashCode();
+                result.Message = "角色ID参数无效";
+                return result;
+            }
+            if (string.IsNullOrWhiteSpace(entity.AdminRoleName))
+            {
+                result.Status = StatusCode.ParamError.GetHashCode();
+                result.Message = "请输入角色名称";
+                return result;
+            }
+            if (entity.AdminRoleStatus < 0)
+            {
+                result.Status = StatusCode.ParamError.GetHashCode();
+                result.Message = "请选择角色状态";
+                return result;
+            }
+            var model = DataRepository.adminManageDAL.UpdateAdminRole(entity);
+            if (model>0)
+            {
+                result.Status = StatusCode.Success.GetHashCode();
+                result.Message = "操作成功";
 
+            }
+            else
+            {
+                result.Status = StatusCode.Fail.GetHashCode();
+                result.Message = "操作失败";
+            }
+            return result;
+        }
+        /// <summary>
+        /// 根据id查询角色实体
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        public ApiDataModel<AdminRole> GetAdminRoleByID(int Id)
+        {
+            ApiDataModel<AdminRole> result = new ApiDataModel<AdminRole>();
+            if(Id<=0)
+            {
+                result.Status = StatusCode.InvalidParameter.GetHashCode();
+                result.Message = "参数无效";
+                return result;
+            }
+            var model = DataRepository.adminManageDAL.GetAdminRoleByID(Id);
+            if(model==null)
+            {
+                result.Status = StatusCode.NotExisted.GetHashCode();
+                result.Message = "数据不存在";
+            }
+            else
+            {
+                result.Status = StatusCode.Success.GetHashCode();
+                result.Message = "操作成功";
+                result.Data = model;
+            }
+            return result;
+
+        }
+        /// <summary>
+        /// 删除角色
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ApiDataModel<int> DeleteAdminRole(int id)
+        {
+            ApiDataModel<int> result = new ApiDataModel<int>();
+            if (id <= 0)
+            {
+                result.Status = StatusCode.InvalidParameter.GetHashCode();
+                result.Message = "参数无效";
+                return result;
+            }
+            var r= DataRepository.adminManageDAL.DeleteAdminRole(id);
+            if(r>0)
+            {
+                result.Status = StatusCode.Success.GetHashCode();
+                result.Message = "操作成功";
+                result.Data = r;
+            }
+            else
+            {
+                result.Status = StatusCode.Fail.GetHashCode();
+                result.Message = "操作失败";
+                result.Data = r;
+            }
+            return result;
+        }
+        /// <summary>
+        /// 获取角色列表
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public List<AdminRole> GetAdminRoleList(AdminRoleQuery model)
+        {
+            
+            return DataRepository.adminManageDAL.GetAdminRoleList(model);
+        }
+        #endregion
 
     }
 }
