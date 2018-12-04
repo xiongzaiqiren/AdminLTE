@@ -57,6 +57,7 @@
     <Compile Include="AdminRoleRelation.cs" />
     <Compile Include="Enum\ModelEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequestQuery.cs" />
     <Compile Include="ResultModel\Admin.cs" />
   </ItemGroup>
   <ItemGroup>
