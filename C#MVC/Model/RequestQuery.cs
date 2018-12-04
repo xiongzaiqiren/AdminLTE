@@ -1,4 +1,6 @@
-public class RequestQuery
+namespace Model
+{
+    public class RequestQuery
     {
         /// <summary>
         /// 分页数
@@ -33,3 +35,4 @@ public class RequestQuery
         public string sortName { get; set; }
         public string sortOrder { get; set; }
     }
+}
