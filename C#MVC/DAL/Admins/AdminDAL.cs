@@ -253,9 +253,9 @@ namespace DAL.Admins
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public List<AdminRole> GetAdminRoleList(AdminRoleQuery model)
+        public IList<AdminRole> GetAdminRoleList(AdminRoleQuery model)
         {
-            List<AdminRole> r = new List<AdminRole>();
+            IList<AdminRole> r ;
 
             using (MySqlContext context = new MySqlContext(Db))
             {
