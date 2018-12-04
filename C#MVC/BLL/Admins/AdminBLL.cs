@@ -300,10 +300,15 @@ namespace BLL.Admins
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public List<AdminRole> GetAdminRoleList(AdminRoleQuery model)
+        public ResponseResultModel<AdminRole> GetAdminRoleList(AdminRoleQuery model)
         {
+            ResponseResultModel<AdminRole> result = new ResponseResultModel<AdminRole>();
+           
             
-            return DataRepository.adminManageDAL.GetAdminRoleList(model);
+            var list= DataRepository.adminManageDAL.GetAdminRoleList(model);
+            result.data = new BootstrapTableData<AdminRole>(model.Count,list);
+            result.status = ResponseStatus.Success;
+            return result;
         }
         #endregion
 
